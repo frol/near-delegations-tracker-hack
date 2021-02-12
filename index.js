@@ -773,7 +773,7 @@ async function main() {
     deps: {
       keyStore,
     },
-    nodeUrl: "https://rpc.mainnet.internal.near.org",
+    nodeUrl: "https://archival-rpc.mainnet.near.org",
     networkId: "default"
   });
 
@@ -788,7 +788,7 @@ async function main() {
 
   for (const [delegatorAccountId, validatorAccountIds] of Object.entries(DELEGATION_BY_DELEGATOR_ACCOUNT_ID)) {
     let nativeDelegatorAccountId;
-    if (delegatorAccountId.startsWith('nfendowment')) {
+    if (!delegatorAccountId.endsWith('.lockup.near') && delegatorAccountId !== 'foundation.near') {
       nativeDelegatorAccountId = generateLockupAccountIdFromAccountId(delegatorAccountId);
     } else {
       nativeDelegatorAccountId = delegatorAccountId
